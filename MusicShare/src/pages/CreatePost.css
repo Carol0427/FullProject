@@ -1,0 +1,6 @@
+.radio-option {
+    /* display: flex; */
+    align-items: center; 
+    gap: 10px;
+    margin-right: -200px;
+}
