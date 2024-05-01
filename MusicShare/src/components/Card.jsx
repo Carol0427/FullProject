@@ -28,6 +28,7 @@ console.log(props.title);
           <div className="likes">
             <h2>👍 {props.likes}</h2>
           </div>
+          <p>posted: {props.created_at}</p>
       </div></Link>
   );
 };

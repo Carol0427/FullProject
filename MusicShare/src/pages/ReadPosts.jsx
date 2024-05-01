@@ -88,6 +88,7 @@ const ReadPosts = (props) => {
             caption={post.caption}
             likes={post.likes}
             flag={post.flag}
+            created_at={post.created_at}
         /></Link>
         
     ))
@@ -98,6 +99,7 @@ const ReadPosts = (props) => {
             caption={post.caption}
             likes={post.likes}
             flag={post.flag}
+            created_at={post.created_at}
         /></Link>
         
       ))}
