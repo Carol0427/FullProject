@@ -9,20 +9,25 @@
     width: 600px;
     text-align: center;
     margin-top: 25px;
-    background-color: white;
+    /* background-color: #65ba3f; */
     color: black;
+    border-color: white;
+    border-style: solid;
+
 }
 
-.title {
+.Card:hover {
+    opacity: 0.8;
+}
+.flag {
     color:black;
     padding-left:30px;
-    font-size: 24px;
+    font-size: 34px;
 }
-
-.author {
+.title {
     color:white;
-    margin-bottom: 20px;
-    font-size: 20px;
+    font-size: 24px;
+
 }
 
 .caption {

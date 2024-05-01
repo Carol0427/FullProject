@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 const ViewPost = () => {
 
     const {id} = useParams();
@@ -79,13 +79,18 @@ const updateComments = async (event) => {
     // UPDATE post
 const deletePost = async (event) => {
     event.preventDefault();
-  
+    const enteredSecretKey = prompt("Please enter your secret key:");
+if(enteredSecretKey == post.secret_key){
     await supabase
       .from('Post')
       .delete()
       .eq('id', id); 
   
     window.location = "/";
+}
+else {
+  alert("wrong secret key entered");
+}
   }
   function backToHome(){
     window.location = "/";
@@ -110,12 +115,22 @@ const deletePost = async (event) => {
       handleClose();
     }
 }
+const editClicked = () => {
+  const enteredSecretKey = prompt("Please enter your secret key:");
+  if (enteredSecretKey == post.secret_key){
+    nav('/edit/' + post.id);
+  }
+  else{
+    alert("wrong secret key entered");
+  }
+}
     return(
         <>
-        <h2 id="title" onClick={backToHome}>Music Share</h2>
+        {/* <h2 className="title" onClick={backToHome}>Music Share</h2> */}
 
         {post ? (
                 <div className="post">
+
                     <h1>{post.title}</h1>
                     <p>{post.caption}</p>
         {post.imgURL && <img src={post.imgURL} alt="womp womp" width="200" height="100"/>}
@@ -123,31 +138,21 @@ const deletePost = async (event) => {
                     <button className="addLikes" onClick={updateLikes}>Click to like: {[likes]}</button>
                     <h3>Comments:</h3>
                     {Array.isArray(post.comments) && post.comments.map((comment, index) => 
-                    <p key={index}>{comment}</p>
+                    <p className="commentBox" key={index}>{comment}</p>
                 )}                   
                      <form>
                         <input type="text" value={postEdit.comments} onChange={handleChange}></input>
-                        <input type="submit" value="Submit" onClick={updateComments} />
+                        <input type="submit" className="btn" value="Add Comment" onClick={updateComments} />
                     </form>
                     {/* Add more post details as needed */}
-                    <button className="editButton" onClick={handleShow}>Edit Post</button>
-                    <button className="deleteButton" onClick={deletePost}>Delete</button>
+                    <button className="btn" onClick={editClicked}>Edit Post</button>
+                    <button className="btn" onClick={deletePost}>Delete</button>
                 </div>
                 
             ) : (
                 <p>Loading...</p>
             )}
-      <Modal show={show} onHide={handleClose} className='modal'>
-              <Modal.Header closeButton>
-                <Modal.Title>Enter secret key: </Modal.Title>
-              </Modal.Header>
-              <Modal.Body><input type="text" value={secretKey} className="secretKeyInput"></input></Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={secretKeyInput}>
-                  Enter
-                </Button>
-              </Modal.Footer>
-            </Modal>
+  =
         </>
     )
 }

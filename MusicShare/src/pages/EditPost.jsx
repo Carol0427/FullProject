@@ -58,6 +58,12 @@ const EditPost = ({}) => {
   
 //     window.location = "/";
 //   }
+function handleRadioChange(event) {
+  setPost(prevState => ({
+  ...prevState,
+  flag: event.target.value
+  }));
+}
     return (
         <div>
             <form>
